@@ -16,6 +16,8 @@ app.options('*', cors())
 // app.use(bodyParser.json());
 app.use(express.json());
 app.use(morgan('tiny'));
+app.use(express.urlencoded({ extended: true }));
+app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 // app.use(authJwt);
 // app.use(errorHandler);
 app.use(
@@ -28,6 +30,7 @@ app.use(
         
         {url:/\/api\/v1\/users\/login/, methods:['POST'] },
         {url:/\/api\/v1\/users/, methods:['POST'] },
+        {url:/\/public\/uploads(.*)/, methods:['GET','OPTIONS']},
         {url:/\/api\/v1\/products(.*)/, methods:['GET','OPTIONS']},
         {url:/\/api\/v1\/categories(.*)/, methods:['GET','OPTIONS'] },
       ]
